@@ -1,65 +1,70 @@
 import { useEffect, useState } from "react";
+import { getStableIndianVoice } from "../utils/voiceEngine";
 
 export default function SpeakButton({ text }) {
-  const [voices, setVoices] = useState([]);
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
 
-  // Load voices
+  // Wait for voices
   useEffect(() => {
-    const loadVoices = () => setVoices(speechSynthesis.getVoices());
-    loadVoices();
-    speechSynthesis.onvoiceschanged = loadVoices;
+    const load = () => {
+      if (speechSynthesis.getVoices().length) {
+        setReady(true);
+      }
+    };
+
+    load();
+    speechSynthesis.onvoiceschanged = load;
+
+    return () => {
+      speechSynthesis.onvoiceschanged = null;
+    };
   }, []);
 
-  // 🎤 Male voice selector
-  const getMaleVoice = () => {
-    if (!voices.length) return null;
-
-    // Prefer strong male voices
-    const male =
-      voices.find(v => v.name.includes("Google UK English Male")) ||
-      voices.find(v => v.name.includes("David")) ||
-      voices.find(v => v.name.includes("Mark")) ||
-      voices.find(v => v.name.includes("Ravi")) ||
-      voices.find(v => v.name.includes("Male"));
-
-    return male || voices[0];
-  };
-
-  // 🔊 Auto speak
   useEffect(() => {
-    if (!text || !voices.length) return;
+    if (!text || !ready) return;
 
-    const cleanText = text.replace(/\./g, ". "); // clarity pauses
+    const timer = setTimeout(() => {
+      let tunedText = text
+        .replace(/UG/g, "U G")
+        .replace(/PG/g, "P G")
+        .replace(/PhD/g, "P H D");
 
-    const utter = new SpeechSynthesisUtterance(cleanText);
-    utter.voice = getMaleVoice();
+      const utter = new SpeechSynthesisUtterance(tunedText);
 
-    // 🎧 Clarity tuning
-    utter.rate = 0.82;   // slower = clearer
-    utter.pitch = 0.9;   // slightly deeper = masculine
-    utter.volume = 1;
+      utter.voice = getStableIndianVoice();
+      utter.lang = "en-IN";
 
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utter);
-    setIsSpeaking(true);
+      utter.rate = 0.72;
+      utter.pitch = 0.88;
+      utter.volume = 1;
 
-    return () => speechSynthesis.cancel();
-  }, [text, voices]);
+      utter.onstart = () => setSpeaking(true);
+      utter.onend = () => setSpeaking(false);
 
-  // 🛑 Stop button
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utter);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+      speechSynthesis.cancel();
+      setSpeaking(false);
+    };
+  }, [text, ready]);
+
   const stopSpeech = () => {
     speechSynthesis.cancel();
-    setIsSpeaking(false);
+    setSpeaking(false);
   };
 
   return (
-    <div>
-      {isSpeaking && (
-        <button className="action" onClick={stopSpeech}>
-          🛑 Stop Voice
+    <>
+      {speaking && (
+        <button className="voice-stop" onClick={stopSpeech}>
+          ⏹ Stop Voice
         </button>
       )}
-    </div>
+    </>
   );
 }

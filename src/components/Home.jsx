@@ -10,14 +10,13 @@ export default function Home() {
   // 🎤 Welcome voice on load
   useEffect(() => {
     const welcomeText =
-      "Welcome to Sahrdaya. What would you like to know?";
+      "Welcome to Sahr-dhaya. What would you like to know?";
 
     const utter = new SpeechSynthesisUtterance(welcomeText);
 
     // Male clarity tuning
-    utter.rate = 0.85;
-    utter.pitch = 0.9;
-
+  utter.rate = 0.70;   // Kerala pacing
+utter.pitch = 0.88;
     // Small delay = natural feel
     const timer = setTimeout(() => {
       speechSynthesis.cancel();
