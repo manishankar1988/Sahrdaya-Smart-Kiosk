@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import SectionPage from "./components/SectionPage";
 import Chatbot from "./components/Chatbot";
-import { HashRouter as BrowserRouter } from "react-router-dom";
+import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 
 const admissionText = `
 Admissions Open 2026 at Sahrdaya College of Engineering and Technology.
