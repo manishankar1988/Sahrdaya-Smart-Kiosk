@@ -1,42 +1,86 @@
+/* ================= ROOT LAYOUT ================= */
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: clamp(16px, 3vw, 32px);
   text-align: center;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* ================= LOGO ================= */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  height: clamp(80px, 10vw, 140px);
+  margin-bottom: 10px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  animation: logoIntro 0.9s ease-out;
 }
+
+/* Logo hover glow */
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  transform: scale(1.05);
+  filter: drop-shadow(0 8px 20px rgba(59, 130, 246, 0.4));
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Logo intro animation */
+@keyframes logoIntro {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-20px);
   }
-  to {
-    transform: rotate(360deg);
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  100% {
+    transform: scale(1);
   }
 }
 
+/* ================= HEADER TITLE ================= */
+.kiosk-title {
+  font-weight: 800;
+  font-size: clamp(22px, 3vw, 34px);
+
+  /* Gradient blue text */
+  background: linear-gradient(90deg, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Illumination glow */
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.35);
+
+  margin: 0;
+}
+
+/* Optional subtle glow animation */
+.kiosk-title {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(59, 130, 246, 0.25);
+  }
+  50% {
+    text-shadow:
+      0 0 14px rgba(59, 130, 246, 0.6),
+      0 0 22px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* ================= CARD (OPTIONAL) ================= */
 .card {
-  padding: 2em;
+  padding: clamp(16px, 2vw, 24px);
 }
 
+/* ================= SMALL TEXT ================= */
 .read-the-docs {
   color: #888;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  #root {
+    padding: 16px;
+  }
 }

@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import logo from "../assets/logo.png";
+import banner from "../assets/banner1.png";
 import conf from "../assets/adsssc.png";
 import gram from "../assets/gramvista.png";
 
+
 export default function Home() {
   const nav = useNavigate();
+ 
 
   // 🎤 Welcome voice on load
   useEffect(() => {
@@ -64,11 +67,12 @@ utter.pitch = 0.88;
   ];
 
   return (
+    
     <div className="home">
       <header className="header-inner">
-        <img src={logo} className="logo" />
-        <h1>Sahrdaya Smart Kiosk</h1>
-      </header>
+  <img src={banner} className="logo" />
+  <h1 className="kiosk-title">SAHRDAYA SMART KIOSK</h1>
+</header>
 
       <div className="grid">
         {tiles.map((t, i) => (
