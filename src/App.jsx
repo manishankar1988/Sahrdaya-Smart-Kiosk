@@ -50,16 +50,16 @@ Connecting villages to global research, industry, and policy platforms through t
 `;
 
 const aboutText = `
-Sahrdhaya College is a Autonomous Engineering College entering in to 25 years of excellence
+Sahrdaya College is a Autonomous Engineering College entering in to 25 years of excellence
 All UG programs are Accredited by NBA
 
 Kerala's First Intel Accredited AI Campus
 
 More than 90% placements
 
-Sahrdhaya Encourages Project Based Learning & Experiential Learning
+Sahrdaya Encourages Project Based Learning & Experiential Learning
 
-Sahrdhaya has a Government Recognized Technology Business Incubator (TBI) e-Yantra, IOT, C2S, CPS & Robotics Labs
+Sahrdaya has a Government Recognized Technology Business Incubator (TBI) e-Yantra, IOT, C2S, CPS & Robotics Labs
 
 also Industry-Supported Laboratories from IIT, Agappe, Accenture, Dell & Intel
 
@@ -67,7 +67,7 @@ it is a Residential Campus with separate hostel for boys & girls
 
 Winner of Swachh Campus Award from AICTE & Eco-friendly Green Campus
 
-sahrdhaya has been awarded with Best IEEE Student Branch
+sahrdaya has been awarded with Best IEEE Student Branch
 
 Modern Library with 24×7 Internet Connectivity
 

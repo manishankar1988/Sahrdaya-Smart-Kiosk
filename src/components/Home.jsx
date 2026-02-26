@@ -13,7 +13,7 @@ export default function Home() {
   // 🎤 Welcome voice on load
   useEffect(() => {
     const welcomeText =
-      "Welcome to Sahr-dhaya. What would you like to know?";
+      "Welcome to Sahr-daya. What would you like to know?";
 
     const utter = new SpeechSynthesisUtterance(welcomeText);
 
