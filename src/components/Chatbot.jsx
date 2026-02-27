@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import knowledge from "../data/knowledge.txt?raw";
 
@@ -20,7 +21,6 @@ const knowledgeMap = {
 function getAnswer(question) {
   const q = question.toLowerCase();
 
-  // Try keyword categories
   for (const key in knowledgeMap) {
     if (knowledgeMap[key].some((word) => q.includes(word))) {
       const start = cleanKnowledge.indexOf(key);
@@ -30,7 +30,6 @@ function getAnswer(question) {
     }
   }
 
-  // fallback: fuzzy match any sentence
   const lines = knowledge.split("\n");
   const match = lines.find((line) =>
     q.split(" ").some((w) => line.toLowerCase().includes(w))
@@ -40,6 +39,7 @@ function getAnswer(question) {
 }
 
 export default function Chatbot() {
+  const nav = useNavigate(); // ✅ FIXED POSITION
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -60,6 +60,11 @@ export default function Chatbot() {
   return (
     <div className="chat-container">
       <h2 className="chat-title">Sahrdaya AI Assistant</h2>
+
+      {/* ✅ BACK BUTTON */}
+      <button className="back-btn" onClick={() => nav("/")}>
+        ⬅ Home
+      </button>
 
       {/* Messages */}
       <div className="chat-box">

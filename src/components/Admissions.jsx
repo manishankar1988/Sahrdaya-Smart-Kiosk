@@ -1,4 +1,5 @@
 // Admissions.jsx
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./admission.css";
 import SpeakButton from "./SpeakButton";
@@ -7,6 +8,7 @@ import { admissionSections } from "../data/admissionData";
 export default function Admissions() {
   const firstKey = Object.keys(admissionSections)[0] || "";
   const [active, setActive] = useState(firstKey);
+  const nav = useNavigate();
 
   // For Programmes Offered inner tabs
   // default to first inner category
@@ -99,6 +101,7 @@ export default function Admissions() {
             </div>
           ))}
         </div>
+        
 
         {/* Inner content */}
         <div className="inner-content">
@@ -112,6 +115,10 @@ export default function Admissions() {
             renderSectionContent(innerData)
           )}
         </div>
+          <button className="back-btn" onClick={() => nav("/")}>
+  ⬅ Home
+</button>
+      
       </>
     );
   };
