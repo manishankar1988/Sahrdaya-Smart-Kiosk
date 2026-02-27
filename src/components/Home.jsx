@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import banner from "../assets/banner1.png";
 import conf from "../assets/adsssc.png";
 import gram from "../assets/gramvista.png";
+import welcomeAudio from "../assets/welcome.mp3";
 
 
 export default function Home() {
@@ -11,28 +12,23 @@ export default function Home() {
  
 
   // 🎤 Welcome voice on load
-  useEffect(() => {
-    const welcomeText =
-      "Welcome to Sahr-daya. What would you like to know?";
+useEffect(() => {
+  const audio = new Audio(welcomeAudio);
 
-    const utter = new SpeechSynthesisUtterance(welcomeText);
+  audio.volume = 1; // 0 to 1
 
-    // Male clarity tuning
-  utter.rate = 0.70;   // Kerala pacing
-utter.pitch = 0.88;
-    // Small delay = natural feel
-    const timer = setTimeout(() => {
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utter);
-    }, 600);
+  const timer = setTimeout(() => {
+    audio.play().catch(() => {
+      console.log("Autoplay blocked by browser");
+    });
+  }, 600);
 
-    // Stop speech when leaving home
-    return () => {
-      clearTimeout(timer);
-      speechSynthesis.cancel();
-    };
-  }, []);
-
+  return () => {
+    clearTimeout(timer);
+    audio.pause();
+    audio.currentTime = 0;
+  };
+}, []);
   const tiles = [
     {
       title: "Admissions Open 2026",
