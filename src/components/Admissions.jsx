@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./admission.css";
 import SpeakButton from "./SpeakButton";
+
 import { admissionSections } from "../data/admissionData";
 
 export default function Admissions() {

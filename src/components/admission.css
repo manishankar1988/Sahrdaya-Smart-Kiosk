@@ -136,6 +136,31 @@
   border-bottom: 1px solid #e3f2fd;
   font-size: 16px;
 }
+.iframe-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+
+.iframe-header {
+  background: #002855;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iframe-full {
+  flex: 1;
+  border: none;
+}
 
 /* Optional: spacing for nested headings */
 .subsection h3 {
